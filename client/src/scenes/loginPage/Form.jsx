@@ -64,7 +64,7 @@ const Form = () => {
     formData.append("picturePath", values.picture.name);
 
     const savedUserResponse = await fetch(
-      "http://localhost:3001/auth/register",
+      "https://postpedia-gno5.onrender.com/auth/register",
       {
         method: "POST",
         body: formData,

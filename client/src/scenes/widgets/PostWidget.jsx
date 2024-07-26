@@ -41,7 +41,7 @@ const PostWidget = ({
   const primary = palette.primary.main;
 
   const patchLike = async () => {
-    const response = await fetch(`http://localhost:3001/posts/${postId}/like`, {
+    const response = await fetch(`https://postpedia-gno5.onrender.com/posts/${postId}/like`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -54,7 +54,7 @@ const PostWidget = ({
   };
 
   const handleCommentSubmit = async () => {
-    const response = await fetch(`http://localhost:3001/posts/${postId}/comment/`, {
+    const response = await fetch(`https://postpedia-gno5.onrender.com/posts/${postId}/comment/`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -69,7 +69,7 @@ const PostWidget = ({
 
   const handleDeleteComment = async (commentId) => {
     try {
-      const response = await fetch(`http://localhost:3001/posts/${postId}/comment/${commentId}`, {
+      const response = await fetch(`https://postpedia-gno5.onrender.com/posts/${postId}/comment/${commentId}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,

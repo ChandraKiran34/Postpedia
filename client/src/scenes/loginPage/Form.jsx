@@ -48,6 +48,7 @@ const initialValuesLogin = {
 
 const Form = () => {
   const [pageType, setPageType] = useState("login");
+  const [isLoading, setIsLoading] = useState(false);
   const { palette } = useTheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -56,6 +57,7 @@ const Form = () => {
   const isRegister = pageType === "register";
 
   const register = async (values, onSubmitProps) => {
+    setIsLoading(true);
     // this allows us to send form info with image
     const formData = new FormData();
     for (let value in values) {
@@ -76,17 +78,17 @@ const Form = () => {
     if (savedUser) {
       setPageType("login");
     }
+    setIsLoading(false);
   };
 
   const login = async (values, onSubmitProps) => {
+    setIsLoading(true);
     const loggedInResponse = await fetch("https://postpedia-gno5.onrender.com/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
     });
-    console.log("print")
     const loggedIn = await loggedInResponse.json();
-    console.log(loggedIn);
     onSubmitProps.resetForm();
     if (loggedIn) {
       dispatch(
@@ -97,6 +99,7 @@ const Form = () => {
       );
       navigate("/home");
     }
+    setIsLoading(false);
   };
 
   const handleFormSubmit = async (values, onSubmitProps) => {
@@ -247,7 +250,7 @@ const Form = () => {
                 "&:hover": { color: palette.primary.main },
               }}
             >
-              {isLogin ? "LOGIN" : "REGISTER"}
+              {isLoading ? "Loading..." : isLogin ? "LOGIN" : "REGISTER"}
             </Button>
             <Typography
               onClick={() => {
